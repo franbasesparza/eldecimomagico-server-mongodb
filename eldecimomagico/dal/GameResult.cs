@@ -20,7 +20,7 @@ namespace eldecimomagico.dal
         [JsonPropertyName("gameId")]
         public string GameId { get; set; }
 
-        [BsonElement("gameAwardsId")]
+        [BsonElement("gameAwardId")]
         [JsonPropertyName("gameAwardId")]
         public string GameAwardId { get; set; }
 

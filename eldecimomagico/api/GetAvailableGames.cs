@@ -38,7 +38,11 @@ namespace eldecimomagico.api
             }
             catch (Exception ex)
             {
-                log.LogError(ex, "Error geting group types");
+                log.LogError(
+                        ex,
+                        $"Error getting Available games: {ex.Message}, Stack Trace: {ex.StackTrace}"
+                    );
+
 
                 return new StatusCodeResult(500);
             }

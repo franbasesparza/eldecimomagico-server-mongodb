@@ -12,6 +12,10 @@ namespace eldecimomagico.dal
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
+        [BsonElement("playedCount")]
+        [JsonPropertyName("playedCount")]
+        public int PlayedCount { get; set; }
+
         [BsonElement("maxRandomNumber")]
         [JsonPropertyName("maxRandomNumber")]
         public int MaxRandomNumber { get; set; }
