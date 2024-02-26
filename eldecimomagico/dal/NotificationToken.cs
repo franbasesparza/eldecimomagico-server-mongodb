@@ -12,9 +12,9 @@ namespace eldecimomagico.dal
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
-        [BsonElement("userId")]
-        [JsonPropertyName("userId")]
-        public string UserId { get; set; }
+        [BsonElement("userPhoneNumber")]
+        [JsonPropertyName("userPhoneNumber")]
+        public string UserPhoneNumber { get; set; }
 
         [BsonElement("token")]
         [JsonPropertyName("token")]

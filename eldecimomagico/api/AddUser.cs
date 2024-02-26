@@ -19,7 +19,7 @@ namespace eldecimomagico.api
 
         [FunctionName("AddUser")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "adduser")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = "adduser")] HttpRequest req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request (AddUser)");
@@ -45,7 +45,7 @@ namespace eldecimomagico.api
                     Id = ObjectId.GenerateNewId().ToString(),
                     UserId = user.Id
                 };
-                db.GetCollection<Wallet>("wallet").InsertOne(wallet);
+                db.GetCollection<Wallet>("wallets").InsertOne(wallet);
 
                 return new OkResult();
             }

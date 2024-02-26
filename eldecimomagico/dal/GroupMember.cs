@@ -14,9 +14,9 @@ namespace eldecimomagico.dal
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
-        [BsonElement("phone")]
-        [JsonPropertyName("phone")]
-        public string Phone { get; set; }
+        [BsonElement("phoneNumber")]
+        [JsonPropertyName("phoneNumber")]
+        public string PhoneNumber { get; set; }
 
         [BsonElement("isAdmin")]
         [JsonPropertyName("isAdmin")]
@@ -36,7 +36,7 @@ namespace eldecimomagico.dal
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder($"GroupMember(Id={Id}, Phone={Phone}, IsAdmin={IsAdmin}, UserId={UserId}, GroupId={GroupId})");
+            StringBuilder sb = new StringBuilder($"GroupMember(Id={Id}, PhoneNumber={PhoneNumber}, IsAdmin={IsAdmin}, UserId={UserId}, GroupId={GroupId})");
             return sb.ToString();
         }
     }

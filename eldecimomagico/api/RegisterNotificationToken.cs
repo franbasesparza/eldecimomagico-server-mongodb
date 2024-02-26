@@ -36,7 +36,7 @@ namespace eldecimomagico.api
                 MongoClient client = new MongoClient(connectionString);
                 var db = client.GetDatabase(dbName);
 
-                var filter = Builders<NotificationToken>.Filter.Eq(n => n.UserId, newNotificationToken.UserId);
+                var filter = Builders<NotificationToken>.Filter.Eq(n => n.UserPhoneNumber, newNotificationToken.UserPhoneNumber);
                 var notificationToken = db.GetCollection<NotificationToken>("notificationTokens").Find(filter).FirstOrDefault();
 
                 if (notificationToken == null)
@@ -44,7 +44,7 @@ namespace eldecimomagico.api
                     notificationToken = new NotificationToken
                     {
                         Id = ObjectId.GenerateNewId().ToString(),
-                        UserId = newNotificationToken.UserId,
+                        UserPhoneNumber = newNotificationToken.UserPhoneNumber,
                         Token = newNotificationToken.Token
                     };
                     db.GetCollection<NotificationToken>("notificationTokens").InsertOne(notificationToken);

@@ -16,17 +16,13 @@ namespace eldecimomagico.dal
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
-        [BsonElement("surame")]
-        [JsonPropertyName("surname")]
-        public string? Surname { get; set; }
+        [BsonElement("email")]
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
 
-        [BsonElement("nickname")]
-        [JsonPropertyName("nickname")]
-        public string? Nickname { get; set; }
-
-        [BsonElement("phone")]
-        [JsonPropertyName("phone")]
-        public string Phone { get; set; }
+        [BsonElement("phoneNumber")]
+        [JsonPropertyName("phoneNumber")]
+        public string PhoneNumber { get; set; }
 
         [BsonElement("createdOn")]
         [JsonPropertyName("createdOn")]

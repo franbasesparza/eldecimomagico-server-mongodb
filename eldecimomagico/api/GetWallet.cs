@@ -44,7 +44,10 @@ namespace eldecimomagico.api
             }
             catch (Exception ex)
             {
-                log.LogError(ex, "Error geting wallet");
+                log.LogError(
+                    ex,
+                    $"Error getting wallet: {ex.Message}, Stack Trace: {ex.StackTrace}"
+                );
 
                 return new StatusCodeResult(500);
             }

@@ -19,9 +19,9 @@ namespace eldecimomagico.api
 
         [FunctionName("GetUser")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "getuser/{id}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "getuser/{phoneNumber}")] HttpRequest req,
             ILogger log,
-            string id)
+            string phoneNumber)
         {
             log.LogInformation("C# HTTP trigger function processed a request (GetUser)");
 
@@ -30,7 +30,7 @@ namespace eldecimomagico.api
                 MongoClient client = new MongoClient(connectionString);
                 var db = client.GetDatabase(dbName);
 
-                var filter = Builders<User>.Filter.Eq("_id", ObjectId.Parse(id));
+                var filter = Builders<User>.Filter.Eq(u => u.PhoneNumber, phoneNumber);
                 var user = db.GetCollection<User>("users").Find(filter).FirstOrDefault();
 
                 if (user == null)

@@ -39,7 +39,7 @@ namespace eldecimomagico.api
                     member.Id = ObjectId.GenerateNewId().ToString();
                     member.CreatedOn = DateTime.UtcNow;
 
-                    var filter = Builders<User>.Filter.Eq(u => u.Phone, member.Phone);
+                    var filter = Builders<User>.Filter.Eq(u => u.PhoneNumber, member.PhoneNumber);
                     User user = db.GetCollection<User>("users").Find(filter).FirstOrDefault();
                     
                     if (user == null)
@@ -48,7 +48,7 @@ namespace eldecimomagico.api
                         user = new User
                         {
                             Id = ObjectId.GenerateNewId().ToString(),
-                            Phone = member.Phone,
+                            PhoneNumber = member.PhoneNumber,
                             IsRegistered = false,
                             CreatedOn = DateTime.UtcNow
                         };

@@ -52,9 +52,7 @@ namespace eldecimomagico.api
             {
                 Id = ObjectId.GenerateNewId().ToString(),
                 Name = "Francisco",
-                Surname = "Bas Esparza",
-                Nickname = "Fran",
-                Phone = "+34679012369",
+                PhoneNumber = "+34679012369",
                 CreatedOn = DateTime.UtcNow,
                 IsRegistered = true
             };
