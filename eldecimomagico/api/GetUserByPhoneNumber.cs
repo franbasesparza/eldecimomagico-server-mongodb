@@ -12,14 +12,14 @@ using MongoDB.Bson;
 
 namespace eldecimomagico.api
 {
-    public static class GetUser
+    public static class GetUserByPhoneNumber
     {
         private static string connectionString = Environment.GetEnvironmentVariable("MongoDbConnectionString");
         private static string dbName = Environment.GetEnvironmentVariable("MongoDbName");
 
-        [FunctionName("GetUser")]
+        [FunctionName("GetUserByPhoneNumber")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "getuser/{phoneNumber}")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "getuserbyphonenumber/{phoneNumber}")] HttpRequest req,
             ILogger log,
             string phoneNumber)
         {

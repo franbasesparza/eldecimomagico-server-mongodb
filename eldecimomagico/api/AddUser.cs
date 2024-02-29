@@ -33,19 +33,31 @@ namespace eldecimomagico.api
                 MongoClient client = new MongoClient(connectionString);
                 var db = client.GetDatabase(dbName);
 
-                //Create user
-                user.Id = ObjectId.GenerateNewId().ToString();
-                user.IsRegistered = true;
-                user.CreatedOn = DateTime.UtcNow;
-                db.GetCollection<User>("users").InsertOne(user);
-                
-                //Create wallet
-                var wallet = new Wallet
+                var existingUserFilter = Builders<User>.Filter.Eq(u => u.Email, user.Email);
+                var existingUser = db.GetCollection<User>("users").Find(existingUserFilter).FirstOrDefault();
+
+                if (existingUser != null)
                 {
-                    Id = ObjectId.GenerateNewId().ToString(),
-                    UserId = user.Id
-                };
-                db.GetCollection<Wallet>("wallets").InsertOne(wallet);
+                    // User exists, update phone number
+                    var updateDefinition = Builders<User>.Update.Set(u => u.PhoneNumber, user.PhoneNumber);
+                    db.GetCollection<User>("users").UpdateOne(existingUserFilter, updateDefinition);
+                }
+                else
+                {
+                    // User does not exist, insert new user
+                    user.Id = ObjectId.GenerateNewId().ToString();
+                    user.IsRegistered = true;
+                    user.CreatedOn = DateTime.UtcNow;
+                    db.GetCollection<User>("users").InsertOne(user);
+
+                    //Create wallet
+                    var wallet = new Wallet
+                    {
+                        Id = ObjectId.GenerateNewId().ToString(),
+                        UserId = user.Id
+                    };
+                    db.GetCollection<Wallet>("wallets").InsertOne(wallet);
+                }
 
                 return new OkResult();
             }

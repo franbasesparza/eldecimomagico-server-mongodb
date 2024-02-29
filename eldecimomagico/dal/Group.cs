@@ -26,9 +26,9 @@ namespace eldecimomagico.dal
         [JsonPropertyName("createdOn")]
         public DateTime CreatedOn { get; set; }
 
-        [BsonElement("backgroundImage")]
-        [JsonPropertyName("backgroundImage")]
-        public string? BackgroundImage { get; set; }
+        [BsonElement("groupPhotoUrl")]
+        [JsonPropertyName("groupPhotoUrl")]
+        public string? GroupPhotoUrl { get; set; }
 
         public override string ToString()
         {
