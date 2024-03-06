@@ -25,7 +25,7 @@ namespace eldecimomagico.api
             int year,
             string userId)
         {
-            log.LogInformation("C# HTTP trigger function processed a request (Participations)");
+            log.LogInformation("C# HTTP trigger function processed a request (User Participations)");
 
             try
             {

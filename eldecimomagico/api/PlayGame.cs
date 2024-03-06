@@ -116,53 +116,8 @@ namespace eldecimomagico.api
                         var filter6 = Builders<Year>.Filter.Eq(y => y.Description, "Games");
                         var year = db.GetCollection<Year>("years").Find(filter6).FirstOrDefault();
 
-                        var filter7 = Builders<AdminParticipation>.Filter.Eq(a => a.Year, year.Value);
-                        var adminParticipations = db.GetCollection<AdminParticipation>("adminParticipations").Find(filter7).ToList();
-                        var notFound = true;
-                        i = 0;
-                        while (notFound && i < adminParticipations.Count)
-                        {
-                            string targetAdminParticipationId = adminParticipations[i].Id;
-                            var filter8 = Builders<UserAdminParticipation>.Filter.Eq(u => u.AdminParticipationId, targetAdminParticipationId);
-                            var sumResult = db.GetCollection<UserAdminParticipation>("userAdminParticipations")
-                                .Aggregate()
-                                .Match(filter8)
-                                .Group(new BsonDocument { { "_id", BsonNull.Value }, { "totalAmount", new BsonDocument("$sum", "$amount") } })
-                                .FirstOrDefault();
-                            float totalAmount = sumResult?.GetValue("totalAmount", 0).ToInt32() ?? 0.0f;
-
-                            if (totalAmount + award.Quantity <= adminParticipations[i].Amount)
-                            {
-                                var userAdminParticipation = new UserAdminParticipation
-                                {
-                                    Id = ObjectId.GenerateNewId().ToString(),
-                                    UserId = userId,
-                                    AdminParticipationId = adminParticipations[i].Id,
-                                    Amount = award.Quantity,
-                                    GameResultId = gameResult.Id,
-                                    PurchaseId = "",
-                                    CreatedOn = DateTime.UtcNow
-                                };
-                                db.GetCollection<UserAdminParticipation>("userAdminParticipations").InsertOne(userAdminParticipation);
-                                notFound = false;
-                            }
-                        }
-                        if (notFound)
-                        {
-                            var filter8 = Builders<AdminParticipation>.Filter.Eq(a => a.Year, 0);
-                            var adminParticipation = db.GetCollection<AdminParticipation>("adminParticipations").Find(filter8).FirstOrDefault();
-                            var userAdminParticipation = new UserAdminParticipation
-                            {
-                                Id = ObjectId.GenerateNewId().ToString(),
-                                UserId = userId,
-                                AdminParticipationId = adminParticipation.Id,
-                                Amount = award.Quantity,
-                                GameResultId = gameResult.Id,
-                                PurchaseId = "",
-                                CreatedOn = DateTime.UtcNow
-                            };
-                            db.GetCollection<UserAdminParticipation>("userAdminParticipations").InsertOne(userAdminParticipation);
-                        }
+                        Utils.AssignUserAdminParticipation(log, connectionString, dbName, year.Value, award.Quantity, userId, gameResult.Id, "", "");
+                        
                     }
                     //Money award
                     else if (awardId == moneyAward.Id)

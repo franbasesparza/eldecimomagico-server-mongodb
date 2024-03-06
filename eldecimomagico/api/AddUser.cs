@@ -57,6 +57,7 @@ namespace eldecimomagico.api
                         UserId = user.Id
                     };
                     db.GetCollection<Wallet>("wallets").InsertOne(wallet);
+
                 }
 
                 return new OkResult();

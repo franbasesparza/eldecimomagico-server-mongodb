@@ -19,6 +19,10 @@ namespace eldecimomagico.dal
         [JsonPropertyName("adminParticipationId")]
         public string AdminParticipationId { get; set; }
 
+        [BsonElement("year")]
+        [JsonPropertyName("yeaer")]
+        public float Year { get; set; }
+
         [BsonElement("amount")]
         [JsonPropertyName("amount")]
         public float Amount { get; set; }
@@ -27,6 +31,11 @@ namespace eldecimomagico.dal
         [JsonPropertyName("gameResultId")]
         public string GameResultId { get; set; }
 
+        [BsonElement("inAppSubscriptionId")]
+        [JsonPropertyName("inAppSubscriptionId")]
+        public string InAppSubscriptionId { get; set; }
+
+        //Purchased using App Wallet
         [BsonElement("purchaseId")]
         [JsonPropertyName("purchaseId")]
         public string PurchaseId { get; set; }
