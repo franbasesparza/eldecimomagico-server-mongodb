@@ -16,6 +16,7 @@ namespace eldecimomagico.api
 {
     public static class RefreshPremiosLoteriaNavidadRTVE
     {
+        //OLD: private static readonly string API_EL_PAIS_URL = "https://api.elpais.com/ws/LoteriaNavidadPremiados";
         //https://www.rtve.es/loterias/loteria-navidad/Loteria_00000.shtml
         //https://pabloclementeperez.com/2023/12/31/pesadilla-antes-de-navidad-con-la-app-de-la-loteria/
 
@@ -85,7 +86,6 @@ namespace eldecimomagico.api
                         int number = int.Parse(numberNode.InnerText.Trim().Replace(".", ""));
                         int price = int.Parse(priceNode.InnerText.Trim().Replace(".", "").Replace("&euro;", ""));
 
-                        //Create wallet
                         var premioLoteriaNavidad = new PremioLoteriaNavidad
                         {
                             Year = 2023,

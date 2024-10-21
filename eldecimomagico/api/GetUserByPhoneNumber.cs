@@ -23,7 +23,7 @@ namespace eldecimomagico.api
             ILogger log,
             string phoneNumber)
         {
-            log.LogInformation("C# HTTP trigger function processed a request (GetUser)");
+            log.LogInformation($"C# HTTP trigger function processed a request (GetUserByPhoneNumber): *{phoneNumber}*");
 
             try
             {
@@ -35,6 +35,7 @@ namespace eldecimomagico.api
 
                 if (user == null)
                 {
+                    log.LogInformation("USER NOT FOUND!!");
                     return new NotFoundObjectResult(new { error = "User not found" });
                 }
 

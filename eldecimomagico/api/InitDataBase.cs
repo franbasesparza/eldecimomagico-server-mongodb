@@ -107,6 +107,10 @@ namespace eldecimomagico.api
             year = new Year { Id = ObjectId.GenerateNewId().ToString(), Value = 2024, Description = "Sorteo de Navidad" };
             db.GetCollection<Year>("years").InsertOne(year);
 
+            var nextDrawDate = DateTime.Parse("2024-12-22 09:00:00");
+            var infoNextSorteoLoteriaNavidad = new InfoNextSorteoLoteriaNavidad { DateNextSorteo = nextDrawDate, Status = 0};
+            db.GetCollection<InfoNextSorteoLoteriaNavidad>("infoNextSorteoLoteriaNavidad").InsertOne(infoNextSorteoLoteriaNavidad);
+
             var adminParticipation = new AdminParticipation
             {
                 Id = ObjectId.GenerateNewId().ToString(),
